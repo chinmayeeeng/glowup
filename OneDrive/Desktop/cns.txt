@@ -1,0 +1,205 @@
+1.FOR CASE TYPE:
+import PyPDF2
+import re
+
+def extract_case_types_from_pdf(pdf_file_path):
+    # Open the PDF file in read-binary mode
+    with open(pdf_file_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        
+        # Initialize an empty string to store extracted text
+        extracted_text = ''
+        
+        # Extract text from each page of the PDF
+        for page_num in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_num)
+            extracted_text += page.extractText()
+        
+    # Define regular expressions to capture potential case types
+    case_type_patterns = [
+        r'\bCASE TYPE:\s*([A-Z\s]+)\b',
+        r'\bMATTER:\s*([A-Z\s]+)\b',
+        r'\bCAUSE OF ACTION:\s*([A-Z\s]+)\b'
+        # Add more patterns if necessary
+    ]
+    
+    case_types = []
+    
+    # Extract case types using regular expressions
+    for pattern in case_type_patterns:
+        matches = re.findall(pattern, extracted_text, re.IGNORECASE)
+        case_types.extend(matches)
+    
+    # Remove duplicates and return the extracted case types
+    return list(set(case_types))
+
+# Example usage
+pdf_file_path = 'path/to/your/pdf/file.pdf'
+extracted_case_types = extract_case_types_from_pdf(pdf_file_path)
+print("Extracted Case Types:", extracted_case_types)
+
+....................................................................................
+2.FOR CASE NUMBER
+import PyPDF2
+import re
+
+def extract_case_numbers_from_pdf(pdf_file_path):
+    # Open the PDF file in read-binary mode
+    with open(pdf_file_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        
+        # Initialize an empty string to store extracted text
+        extracted_text = ''
+        
+        # Extract text from each page of the PDF
+        for page_num in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_num)
+            extracted_text += page.extractText()
+        
+    # Define regular expression to capture potential case numbers
+    case_number_pattern = r'\b[A-Z]+\s*\d+-\d+\b'
+    
+    # Extract case numbers using the regular expression
+    case_numbers = re.findall(case_number_pattern, extracted_text, re.IGNORECASE)
+    
+    # Return the extracted case numbers
+    return case_numbers
+
+# Example usage
+pdf_file_path = 'path/to/your/pdf/file.pdf'
+extracted_case_numbers = extract_case_numbers_from_pdf(pdf_file_path)
+print("Extracted Case Numbers:", extracted_case_numbers)
+
+.........................................................................................
+FOR CITED CASES
+import PyPDF2
+import re
+
+def extract_cited_cases_from_pdf(pdf_file_path):
+    # Open the PDF file in read-binary mode
+    with open(pdf_file_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        
+        # Initialize an empty string to store extracted text
+        extracted_text = ''
+        
+        # Extract text from each page of the PDF
+        for page_num in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_num)
+            extracted_text += page.extractText()
+        
+    # Define regular expression to capture potential cited cases
+    cited_case_pattern = r'[A-Z][a-z]+\s*v\.?\s*[A-Z][a-z]+(?:\s*\d+)?\s*\d+\s*[A-Z]+\s*\d+'
+    
+    # Extract cited cases using the regular expression
+    cited_cases = re.findall(cited_case_pattern, extracted_text)
+    
+    # Return the extracted cited cases
+    return cited_cases
+
+# Example usage
+pdf_file_path = 'path/to/your/pdf/file.pdf'
+extracted_cited_cases = extract_cited_cases_from_pdf(pdf_file_path)
+print("Extracted Cited Cases:", extracted_cited_cases)
+
+....................................................................................
+FOR ISSUES
+import PyPDF2
+import re
+
+def extract_issues_from_pdf(pdf_file_path):
+    # Open the PDF file in read-binary mode
+    with open(pdf_file_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        
+        # Initialize an empty string to store extracted text
+        extracted_text = ''
+        
+        # Extract text from each page of the PDF
+        for page_num in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_num)
+            extracted_text += page.extractText()
+        
+    # Define regular expression to capture potential issues
+    issue_pattern = r'\b(?:Issue|Problem|Question):\s*([A-Za-z0-9\s]+)\b'
+    
+    # Extract issues using the regular expression
+    issues = re.findall(issue_pattern, extracted_text, re.IGNORECASE)
+    
+    # Return the extracted issues
+    return issues
+
+# Example usage
+pdf_file_path = 'path/to/your/pdf/file.pdf'
+extracted_issues = extract_issues_from_pdf(pdf_file_path)
+print("Extracted Issues:", extracted_issues)
+
+.......................................................................
+FOR LAWYERS
+import PyPDF2
+import re
+
+def extract_lawyers_from_pdf(pdf_file_path):
+    # Open the PDF file in read-binary mode
+    with open(pdf_file_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        
+        # Initialize an empty string to store extracted text
+        extracted_text = ''
+        
+        # Extract text from each page of the PDF
+        for page_num in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_num)
+            extracted_text += page.extractText()
+        
+    # Define regular expression to capture potential lawyer names
+    lawyer_pattern = r'(?:Mr\.|Mrs\.|Ms\.|Dr\.)\s+[A-Z][a-z]+'
+    
+    # Extract lawyer names using the regular expression
+    lawyers = re.findall(lawyer_pattern, extracted_text)
+    
+    # Return the extracted lawyer names
+    return lawyers
+
+# Example usage
+pdf_file_path = 'path/to/your/pdf/file.pdf'
+extracted_lawyers = extract_lawyers_from_pdf(pdf_file_path)
+print("Extracted Lawyers:", extracted_lawyers)
+
+.......................................................................
+FOR PARTIES AFFECTED
+import PyPDF2
+import re
+
+def extract_parties_affected_from_pdf(pdf_file_path):
+    # Open the PDF file in read-binary mode
+    with open(pdf_file_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        
+        # Initialize an empty string to store extracted text
+        extracted_text = ''
+        
+        # Extract text from each page of the PDF
+        for page_num in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_num)
+            extracted_text += page.extractText()
+        
+    # Define regular expression to capture potential parties affected
+    party_pattern = r'\b(?:Plaintiff|Defendant|Appellant|Appellee|Petitioner|Respondent|Party|Claimant):\s*[A-Z][a-z]+'
+    
+    # Extract parties affected using the regular expression
+    parties_affected = re.findall(party_pattern, extracted_text)
+    
+    # Return the extracted parties affected
+    return parties_affected
+
+# Example usage
+pdf_file_path = 'path/to/your/pdf/file.pdf'
+extracted_parties_affected = extract_parties_affected_from_pdf(pdf_file_path)
+print("Parties Affected:", extracted_parties_affected)
